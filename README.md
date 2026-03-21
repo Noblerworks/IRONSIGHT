@@ -125,13 +125,45 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Maps:** Leaflet / React-Leaflet
 - **XML Parsing:** @xmldom/xmldom
 
-## Disclaimer
+## Legal Disclaimer
 
-This project aggregates publicly available open-source intelligence (OSINT) for informational purposes only. All data is sourced from public RSS feeds, public APIs, and public Telegram channels. No paywalls are bypassed, no authentication is circumvented, and no copyrighted content is reproduced -- only headlines and links are displayed.
+### Purpose and Scope
 
-Some data sources use unofficial public endpoints (Google Translate, CNBC quotes, Telegram embeds). These endpoints may change without notice. The project includes graceful fallbacks for all data sources.
+This project is provided strictly for **educational and research purposes**. It demonstrates techniques for aggregating publicly available open-source intelligence (OSINT) using modern web technologies. It is not intended for commercial use, resale of data, or any activity that violates applicable laws or third-party terms of service.
 
-News content, Telegram posts, and alert data belong to their respective publishers and organizations. This project does not claim ownership of any third-party content.
+### Data Sources
+
+All data is sourced from publicly accessible endpoints. No paywalls are bypassed, no authentication is circumvented, and no copyrighted content is reproduced in full -- only headlines, links, and publicly available metadata are displayed.
+
+### Unofficial Endpoints
+
+Some data sources rely on **unofficial or undocumented public endpoints**, including but not limited to: CNBC quote data, Google Translate, Telegram channel embeds, and Google News RSS feeds. These endpoints:
+
+- Are not officially supported APIs and may violate the respective provider's Terms of Service
+- May stop working, change, or be blocked without notice
+- Are used here solely for non-commercial educational demonstration
+- Should be replaced with official APIs if you intend to use this project commercially or in production
+
+### Third-Party Content
+
+News content, Telegram posts, financial data, alert data, and all other third-party content belong to their respective publishers, organizations, and data providers. This project does not claim ownership of any third-party content. Market data may be subject to additional redistribution restrictions from upstream data licensors.
+
+### User Responsibility
+
+By using this software, you agree that:
+
+- **You are solely responsible** for ensuring your use complies with all applicable laws and third-party terms of service in your jurisdiction
+- The authors and contributors of this project are **not liable** for any misuse, TOS violations, legal claims, or damages arising from use of this software
+- You will **not use this software** for commercial data redistribution, automated trading, or any purpose that violates the terms of the underlying data providers
+- This software is provided **"as is"** without warranty of any kind
+
+### ADS-B Data Attribution
+
+Military aircraft tracking data is provided by [adsb.lol](https://www.adsb.lol) under the [Open Database License (ODbL 1.0)](https://opendatacommons.org/licenses/odbl/1-0/).
+
+### No Endorsement
+
+This project is not affiliated with, endorsed by, or sponsored by any of the data providers, news organizations, governments, or military entities whose data it aggregates.
 
 ## License
 
