@@ -4,46 +4,56 @@ import { fetchWithTimeout } from '@/lib/fetcher';
 
 export const dynamic = 'force-dynamic';
 
-// CNBC public quote API — no API key, batch support
-const SYMBOLS = '%40CL.1|%40BZ.1|%40NG.1|%40HO.1|%40RB.1';
-
-const TYPE_MAP: Record<string, { name: string; type: string }> = {
-  '@CL.1': { name: 'WTI Crude Oil', type: 'crude_wti' },
-  '@BZ.1': { name: 'Brent Crude', type: 'crude_brent' },
-  '@NG.1': { name: 'Natural Gas', type: 'natural_gas' },
-  '@HO.1': { name: 'Heating Oil', type: 'heating_oil' },
-  '@RB.1': { name: 'RBOB Gasoline', type: 'gasoline' },
-};
+const COMMODITIES = [
+  { symbol: 'CL=F', name: 'WTI Crude Oil', type: 'crude_wti' },
+  { symbol: 'BZ=F', name: 'Brent Crude', type: 'crude_brent' },
+  { symbol: 'NG=F', name: 'Natural Gas', type: 'natural_gas' },
+  { symbol: 'HO=F', name: 'Heating Oil', type: 'heating_oil' },
+  { symbol: 'RB=F', name: 'RBOB Gasoline', type: 'gasoline' },
+];
 
 export async function GET() {
   try {
-    const url = `https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols=${SYMBOLS}&requestMethod=itv&noCache=1&partnerId=2&fund=1&exthrs=1&output=json&events=1`;
+    const prices = await Promise.all(
+      COMMODITIES.map(async (c) => {
+        try {
+          const url = `https://query1.finance.yahoo.com/v8/finance/chart/${c.symbol}?interval=1d&range=5d`;
+          const res = await fetchWithTimeout(url, {
+            timeout: 8000,
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+          });
+          if (!res.ok) throw new Error('Failed');
+          const data = await res.json();
+          const meta = data?.chart?.result?.[0]?.meta;
+          if (!meta) throw new Error('No data');
 
-    const res = await fetchWithTimeout(url, {
-      timeout: 8000,
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-    });
+          const price = meta.regularMarketPrice ?? 0;
+          const prev = meta.chartPreviousClose ?? price;
+          const change = Math.round((price - prev) * 100) / 100;
+          const pct = prev ? Math.round(((price - prev) / prev) * 10000) / 100 : 0;
 
-    if (!res.ok) throw new Error('Failed');
-    const data = await res.json();
-    const quotes = data?.FormattedQuoteResult?.FormattedQuote || [];
-
-    const prices = quotes.map((q: Record<string, string>) => {
-      const info = TYPE_MAP[q.symbol] || { name: q.name, type: q.symbol };
-      const price = parseFloat((q.last || '0').replace(/,/g, ''));
-      const change = parseFloat((q.change || '0').replace(/,/g, ''));
-      const pct = parseFloat((q.change_pct || '0').replace(/[,%]/g, ''));
-
-      return {
-        type: info.type,
-        name: info.name,
-        price: Math.round(price * 100) / 100,
-        change: Math.round(change * 100) / 100,
-        changePercent: Math.round(pct * 100) / 100,
-        currency: 'USD',
-        updated: new Date().toISOString(),
-      };
-    });
+          return {
+            type: c.type,
+            name: c.name,
+            price: Math.round(price * 100) / 100,
+            change,
+            changePercent: pct,
+            currency: 'USD',
+            updated: new Date().toISOString(),
+          };
+        } catch {
+          return {
+            type: c.type,
+            name: c.name,
+            price: 0,
+            change: 0,
+            changePercent: 0,
+            currency: 'USD',
+            updated: new Date().toISOString(),
+          };
+        }
+      })
+    );
 
     return NextResponse.json(prices, {
       headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=120' },

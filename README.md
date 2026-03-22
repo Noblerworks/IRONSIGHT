@@ -17,10 +17,10 @@ Built with Next.js, TypeScript, Tailwind CSS, and Leaflet. No API keys required.
 - **Regional Threat Monitor** — Per-country threat levels across 10 nations
 - **Military Airspace** — Live military aircraft tracking via adsb.lol
 - **Naval Tracker** — Vessel monitoring in the Persian Gulf and Eastern Mediterranean
-- **Defense & Markets** — Defense contractor stocks, indices, VIX, gold, USD
+- **Defense & Markets** — Defense contractor stocks, indices, VIX, gold, USD via Yahoo Finance
 - **Crypto Markets** — Bitcoin, Ethereum, Solana, BNB with 24h price changes
 - **Prediction Markets** — Live Polymarket odds on Middle East conflict outcomes
-- **Energy Markets** — WTI, Brent, natural gas, heating oil, gasoline
+- **Energy Markets** — WTI, Brent, natural gas, heating oil, gasoline via Yahoo Finance
 - **Satellite Thermal Detect** — NASA FIRMS fire/explosion detection
 
 ## Data Sources
@@ -91,7 +91,7 @@ All data sources are free and require no API keys.
 
 | Service | Data | Provider | Cost |
 |---------|------|----------|------|
-| CNBC Quote API | Stock prices, indices, commodities | CNBC | Free, no key |
+| Yahoo Finance | Stock prices, indices, commodities, oil futures | Yahoo | Free, no key |
 | Tzeva Adom | Israeli missile/rocket alerts | Community mirror of Pikud HaOref | Free, no key |
 | NASA FIRMS | Fire/thermal detection satellite data | NASA | Free, no key |
 | adsb.lol | Military aircraft ADS-B tracking | Community ADS-B network | Free, no key |
@@ -141,7 +141,7 @@ All data is sourced from publicly accessible endpoints. No paywalls are bypassed
 
 ### Unofficial Endpoints
 
-Some data sources rely on **unofficial or undocumented public endpoints**, including but not limited to: CNBC quote data, Google Translate, Telegram channel embeds, and Google News RSS feeds. These endpoints:
+Some data sources rely on **unofficial or undocumented public endpoints**, including but not limited to: Yahoo Finance chart data, Google Translate, Telegram channel embeds, and Google News RSS feeds. These endpoints:
 
 - Are not officially supported APIs and may violate the respective provider's Terms of Service
 - May stop working, change, or be blocked without notice
