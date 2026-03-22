@@ -1,8 +1,4 @@
-// Auto-generated from Israel Central Bureau of Statistics (data.gov.il)
-// 1305 localities + regions + alert terms
-// Do not edit manually - regenerate from government dataset
-
-const CITY_DATA: Record<string, string> = {
+{
   "אבו ג'ווייעד )שבט(": "Abu Juwei'id",
   "אבו גוש": "Abu Ghosh",
   "אבו סנאן": "Abu Sinan",
@@ -1307,7 +1303,5 @@ const CITY_DATA: Record<string, string> = {
   "כל הארץ": "Entire Country",
   "מרכז הארץ": "Central Israel",
   "צפון הארץ": "Northern Israel",
-  "דרום הארץ": "Southern Israel",
-};
-
-export default CITY_DATA;
+  "דרום הארץ": "Southern Israel"
+}

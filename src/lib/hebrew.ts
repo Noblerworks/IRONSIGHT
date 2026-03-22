@@ -1,4 +1,4 @@
-import CITY_DATA from './city-data';
+import CITY_DATA from '../data/city-data.json';
 
 // Hebrew to English translations for Pikud HaOref alert terms
 // The alert system uses a fixed vocabulary so a dictionary works perfectly
