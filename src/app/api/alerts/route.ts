@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { fetchWithTimeout } from '@/lib/fetcher';
-import { translateHebrew, translateCities } from '@/lib/hebrew';
+import { translateHebrew, translateCities, isHebrew, translateFreeText } from '@/lib/hebrew';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,13 +28,16 @@ export async function GET() {
           const rawThreat = alert.threat || alert.title || 'Alert';
           const rawCities = Array.isArray(alert.cities) ? alert.cities : [alert.data || 'Unknown'];
 
+          const translatedThreat = translateHebrew(rawThreat);
+          const translatedLocations = translateCities(rawCities);
+
           alerts.push({
             id: `tzeva-${i}-${Date.now()}`,
             time: alert.date || new Date().toISOString(),
             type: categorizeAlert(rawThreat),
-            threat: translateHebrew(rawThreat),
+            threat: translatedThreat,
             threatOriginal: rawThreat,
-            locations: translateCities(rawCities),
+            locations: translatedLocations,
             locationsOriginal: rawCities,
             source: 'Pikud HaOref',
             active: true,
@@ -46,7 +49,16 @@ export async function GET() {
     console.error('Tzeva Adom fetch error:', err);
   }
 
-  // If no active alerts, get recent history from the notifications endpoint
+  // Fallback: use Google Translate for any remaining Hebrew text the dictionary missed
+  await Promise.all(alerts.map(async (alert) => {
+    if (isHebrew(alert.threat)) {
+      alert.threat = await translateFreeText(alert.threat);
+    }
+    alert.locations = await Promise.all(
+      alert.locations.map(loc => isHebrew(loc) ? translateFreeText(loc) : Promise.resolve(loc))
+    );
+  }));
+
   // The API returns [] when there are no active alerts
   const status = alerts.length > 0 ? 'ACTIVE' : 'CLEAR';
 

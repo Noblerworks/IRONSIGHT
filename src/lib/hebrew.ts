@@ -76,6 +76,7 @@ export const CITY_TRANSLATIONS: Record<string, string> = {
   'רעננה': 'Ra\'anana',
   'הוד השרון': 'Hod HaSharon',
   'דימונה': 'Dimona',
+  'דימון': 'Dimona',
   'ערד': 'Arad',
   'מצפה רמון': 'Mitzpe Ramon',
   'עין גדי': 'Ein Gedi',
