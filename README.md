@@ -1,10 +1,14 @@
-[![Nobler Works](https://raw.githubusercontent.com/Noblerworks/IRONSIGHT/main/nobler-works-banner.JPG)](https://noblerworks.com/)
+<a href="https://noblerworks.com/"><img src="https://raw.githubusercontent.com/Noblerworks/IRONSIGHT/main/nobler-works-banner.JPG" alt="Nobler Works" width="400"></a>
 
 ### Built by [Nobler Works](https://noblerworks.com/)
 
 We build OSINT tools, real-time dashboards, and custom software for clients who need to move fast and see clearly. If you want something like IRONSIGHT built for your domain, [get in touch](https://noblerworks.com/).
 
-**Follow us:** [Website](https://noblerworks.com/) · [X / Twitter](https://x.com/Nobler_Works) · [YouTube](https://www.youtube.com/@NoblerWorks) · [TikTok](https://www.tiktok.com/@noblerworks) · [Threads](https://www.threads.com/@noblerworks)
+[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=googlechrome&logoColor=white)](https://noblerworks.com/)
+[![X](https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Nobler_Works)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@NoblerWorks)
+[![TikTok](https://img.shields.io/badge/TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white)](https://www.tiktok.com/@noblerworks)
+[![Threads](https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=threads&logoColor=white)](https://www.threads.com/@noblerworks)
 
 ---
 
